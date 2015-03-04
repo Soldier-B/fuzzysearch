@@ -1,30 +1,15 @@
-'use strict';
+function fuzzysearch(query, text){
+  var currentIndex = 0, lastIndex = -1;
 
-function fuzzysearch (query, text) {
-  var i;
-  var character;
-  var currentIndex;
-  var lastIndex = -1;
-  var tlen = text.length;
-  var qlen = query.length;
-  if (qlen > tlen) {
+  if(query.length > text.length)
     return false;
-  }
-  if (qlen === tlen && query === text) {
-    return true;
-  }
-  if (text.indexOf(query) > lastIndex) {
-    return true;
-  }
-  for (i = 0; i < qlen; i++) {
-    character = query[i];
-    currentIndex = text.indexOf(character, lastIndex + 1);
-    if (currentIndex === -1) {
-      return false;
-    }
-    lastIndex = currentIndex;
-  }
-  return true;
-}
 
-module.exports = fuzzysearch;
+  if(query.length == text.length && query === text || (text.indexOf(query) + 1))
+    return true;
+
+  return [].every.call(query, function(character){
+    currentIndex = text.indexOf(character, lastIndex + 1);
+    lastIndex = currentIndex;
+    return currentIndex + 1;
+  });
+}
