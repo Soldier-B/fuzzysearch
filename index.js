@@ -1,3 +1,5 @@
+'use strict';
+
 function fuzzysearch(query, text){
   var currentIndex = 0, lastIndex = -1;
 
@@ -13,3 +15,5 @@ function fuzzysearch(query, text){
     return currentIndex + 1;
   });
 }
+
+module.exports = fuzzysearch;
