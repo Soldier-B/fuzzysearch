@@ -6,7 +6,7 @@ function fuzzysearch(query, text){
   if(query.length > text.length)
     return false;
 
-  if(query.length == text.length && query === text || (text.indexOf(query) + 1))
+  if(query === text || text.indexOf(query) + 1)
     return true;
 
   return [].every.call(query, function(character){
